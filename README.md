@@ -1,12 +1,46 @@
-# React + Vite
+<!-- - # 🍫 WreChoco – Where Every Bite is Bliss
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **WreChoco**, a premium chocolate brand crafted for true indulgence.  
+This website is designed to showcase our handcrafted chocolates with elegance and delight.-->
 
-Currently, two official plugins are available:
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+~ Coming Soon ~
 
-## Expanding the ESLint configuration
+<!-- - 🍬 Beautiful, responsive design
+- 🛒 Product showcase & smooth browsing experience
+- 💖 Tailored for chocolate lovers and sweet tooths
+- 🎨 Powered by Tailwind CSS for sleek, custom styling -->
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 💻 Tech Stack
+
+- **React.js** – for a modern and fast frontend
+- **Tailwind CSS** – for clean, utility-first styling
+- **JavaScript** – with a sprinkle of magic ✨
+- **Express** - database😋
+
+<!-- ## 📸 Sneak Peek
+
+> _“Crafted with love. Devoured with joy.”_
+
+![Chocolate Screenshot](https://your-image-link.com/screenshot.png) <!-- optional image -->
+
+<!-- ## 🧑‍🍳 Built With Love
+
+Designed with passion and a sweet tooth by [Your Name or Brand Name].
+Because every chocolate deserves a beautiful home online. 🍫💻
+
+--- -->
+
+<!-- ## 🚀 Live Demo
+
+[🔗 View Website](https://your-live-site-url.com)
+
+--- -->
+
+## 📬 Contact
+
+Feel free to connect or drop a suggestion!  
+📧 afrili.rizki907@gmail.com
+
+<!-- 📸 [@yourInstagramHandle](https://instagram.com/yourInstagramHandle) -->
