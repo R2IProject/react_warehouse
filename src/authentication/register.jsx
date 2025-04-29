@@ -7,36 +7,31 @@ export default function Register() {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setLoading(true);
-    fetch("http://localhost:5000/api-warehouse/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: values.username,
-        email: values.email,
-        role: values.role,
-        password: values.password,
-      }),
-    })
-      .then(() => {
-        messageApi.open({
-          type: "success",
-          content: "Successfully Registered",
-        });
-        setLoading(false);
-        navigate("/");
-      })
-      .catch((error) => {
-        messageApi.open({
-          type: "error",
-          content: `Something went wrong ${error.message}`,
-        });
-        setLoading(false);
+    try {
+      const res = await fetch("http://localhost:5000/api-warehouse/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: values.username,
+          email: values.email,
+          role: values.role,
+          password: values.password,
+        }),
       });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
+      messageApi.success("Register Success");
+      setLoading(false);
+      navigate("/");
+    } catch (err) {
+      messageApi.error(`Something went wrong: ${err.message}`);
+      setLoading(false);
+    }
   };
+
   return (
     <main className="h-screen flex justify-center items-center bg-gray-100">
       {contextHolder}

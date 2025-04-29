@@ -7,33 +7,29 @@ export default function Login() {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setLoading(true);
-    fetch("http://localhost:5000/api-warehouse/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: values.email,
-        password: values.password,
-      }),
-    })
-      .then(() => {
-        messageApi.open({
-          type: "success",
-          content: "Login Success",
-        });
-        setLoading(false);
-        navigate("/dashboard");
-      })
-      .catch((error) => {
-        messageApi.open({
-          type: "error",
-          content: `Something went wrong ${error.message}`,
-        });
-        setLoading(false);
+    try {
+      const res = await fetch("http://localhost:5000/api-warehouse/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
       });
+
+      const data = await res.json();
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
+      messageApi.success("Login Success");
+      setLoading(false);
+      navigate("/users");
+    } catch (err) {
+      messageApi.error(`Something went wrong: ${err.message}`);
+      setLoading(false);
+    }
   };
 
   return (
