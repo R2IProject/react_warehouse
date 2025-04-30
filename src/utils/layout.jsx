@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -9,11 +9,62 @@ import {
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 const { Header, Sider, Content } = Layout;
+import { useNavigate, useLocation } from "react-router-dom";
+
 export default function LayoutComponent({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedKey, setSelectedKey] = useState("2");
+
+  useEffect(() => {
+    const savedKey = localStorage.getItem("selectedKey");
+    if (savedKey) {
+      setSelectedKey(savedKey);
+    } else {
+      setSelectedKey("2");
+      localStorage.setItem("selectedKey", "2");
+    }
+  }, []);
+
+  useEffect(() => {
+    const path = location.pathname;
+
+    if (path.startsWith("/users")) {
+      setSelectedKey("2");
+      localStorage.setItem("selectedKey", "2");
+    } else if (path.startsWith("/locations")) {
+      setSelectedKey("3");
+      localStorage.setItem("selectedKey", "3");
+    } else if (path.startsWith("/inventory")) {
+      setSelectedKey("4");
+      localStorage.setItem("selectedKey", "4");
+    } else if (path.startsWith("/transactions")) {
+      setSelectedKey("5");
+      localStorage.setItem("selectedKey", "5");
+    }
+  }, [location.pathname]);
+
+  const handleClick = (e) => {
+    const key = e.key;
+    setSelectedKey(key);
+    localStorage.setItem("selectedKey", key);
+
+    const keyToPath = {
+      2: "/users",
+      3: "/locations",
+      4: "/inventory",
+      5: "/transactions",
+    };
+
+    if (keyToPath[key]) {
+      navigate(keyToPath[key]);
+    }
+  };
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -21,7 +72,8 @@ export default function LayoutComponent({ children }) {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["2"]}
+          selectedKeys={[selectedKey]}
+          onClick={handleClick}
           className="space-y-7"
           items={[
             {
@@ -31,22 +83,22 @@ export default function LayoutComponent({ children }) {
             {
               key: "2",
               icon: <UserOutlined />,
-              label: <a href="/users">Users</a>,
+              label: "Users",
             },
             {
               key: "3",
               icon: <DatabaseOutlined />,
-              label: <a href="/locations">Locations</a>,
+              label: "Locations",
             },
             {
               key: "4",
               icon: <HomeOutlined />,
-              label: <a href="/inventory">Inventory</a>,
+              label: "Inventory",
             },
             {
               key: "5",
               icon: <InboxOutlined />,
-              label: <a href="/transactions">Transactions</a>,
+              label: "Transactions",
             },
           ]}
         />
