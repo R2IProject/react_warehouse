@@ -10,8 +10,12 @@ import UsersEdit from "./dashboard/users/edit";
 import UsersNew from "./dashboard/users/new";
 
 import LocationsIndex from "./dashboard/locations/index";
-import LocationsIndexEdit from "./dashboard/locations/edit";
-import LocationsIndexsNew from "./dashboard/locations/new";
+import LocationsEdit from "./dashboard/locations/edit";
+import LocationsNew from "./dashboard/locations/new";
+
+import InventoryIndex from "./dashboard/inventory/index";
+import InventoryEdit from "./dashboard/inventory/edit";
+import InventoryNew from "./dashboard/inventory/new";
 
 const routeConfig = [
   { path: "/", element: <Login /> },
@@ -20,8 +24,11 @@ const routeConfig = [
   { path: "/users/:id", element: <UsersEdit /> },
   { path: "/users/new", element: <UsersNew /> },
   { path: "/locations", element: <LocationsIndex /> },
-  { path: "/locations/:id", element: <LocationsIndexEdit /> },
-  { path: "/locations/new", element: <LocationsIndexsNew /> },
+  { path: "/locations/:id", element: <LocationsEdit /> },
+  { path: "/locations/new", element: <LocationsNew /> },
+  { path: "/inventory", element: <InventoryIndex /> },
+  { path: "/inventory/:id", element: <InventoryEdit /> },
+  { path: "/inventory/new", element: <InventoryNew /> },
 ];
 
 const AppRoutes = () => {

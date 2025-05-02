@@ -1,9 +1,9 @@
-import { Button, message, Form, Input, Select } from "antd";
+import { Button, Select, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LayoutComponent from "../../utils/layout";
 
-export default function UsersNew() {
+export default function Register() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
@@ -11,7 +11,7 @@ export default function UsersNew() {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api-warehouse/register", {
+      const res = await fetch("http://localhost:5000/api-warehouse/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -24,7 +24,7 @@ export default function UsersNew() {
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
-      messageApi.success("New User Success");
+      messageApi.success("Register Success");
       setLoading(false);
       navigate("/users");
     } catch (err) {
@@ -42,7 +42,7 @@ export default function UsersNew() {
           name="username"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input placeholder="Please input your username" />
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -50,7 +50,7 @@ export default function UsersNew() {
           name="email"
           rules={[{ required: true, message: "Please input your email!" }]}
         >
-          <Input placeholder="Please input your email" />
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -76,7 +76,7 @@ export default function UsersNew() {
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password placeholder="Please input your password" />
+          <Input.Password />
         </Form.Item>
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit" block loading={loading}>
