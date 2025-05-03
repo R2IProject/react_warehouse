@@ -31,13 +31,13 @@ export default function UsersEdit() {
         const data = await res.json();
         setInventory(data);
         form.setFieldsValue({
-          locationId: data.location[0]._id,
-          product_name: data.product_name,
-          quantity_good: data.quantity_good,
-          description: data.description,
-          expired_date: dayjs(data.expired_date, "YYYY-MM-DD"),
-          status: data.status,
-          unit: data.unit,
+          locationId: data.inventory?.location[0]._id,
+          product_name: data.inventory?.product_name,
+          quantity_good: data.inventory?.quantity_good,
+          description: data.inventory?.description,
+          expired_date: dayjs(data.inventory?.expired_date, "YYYY-MM-DD"),
+          status: data.inventory?.status,
+          unit: data.inventory?.unit,
         });
         if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
       } catch (err) {
@@ -48,7 +48,6 @@ export default function UsersEdit() {
   }, []);
 
   const onFinish = async (values) => {
-    console.log("🚀 ~ onFinish ~ values:", values);
     setLoading(true);
     try {
       const res = await fetch(
@@ -103,8 +102,8 @@ export default function UsersEdit() {
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
             options={
-              Array.isArray(inventory.location)
-                ? inventory.location.map((location) => ({
+              Array.isArray(inventory?.locations)
+                ? inventory.locations.map((location) => ({
                     value: location._id,
                     label: location.name,
                   }))
@@ -160,7 +159,7 @@ export default function UsersEdit() {
           name="unit"
           rules={[{ required: true, message: "Please input the unit!" }]}
         >
-          <Input placeholder="Please input the unit" />
+          <Input type="number" placeholder="Please input the unit" />
         </Form.Item>
 
         <Form.Item label={null}>

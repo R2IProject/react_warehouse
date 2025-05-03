@@ -36,7 +36,6 @@ export default function UsersEdit() {
   }, []);
 
   const onFinish = async (values) => {
-    console.log("🚀 ~ onFinish ~ values:", values);
     setLoading(true);
     try {
       const res = await fetch("http://localhost:5000/api-warehouse/inventory", {

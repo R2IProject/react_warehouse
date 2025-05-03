@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import LayoutComponent from "../../utils/layout";
 import Highlighter from "react-highlight-words";
 
-export default function Users() {
+export default function Inventory() {
   const [inventoryData, setInventoryData] = useState([]);
   const [reload, setReload] = useState(false);
   const navigate = useNavigate();
