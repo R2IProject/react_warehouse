@@ -17,6 +17,10 @@ import InventoryIndex from "./dashboard/inventory/index";
 import InventoryEdit from "./dashboard/inventory/edit";
 import InventoryNew from "./dashboard/inventory/new";
 
+import TransactionsIndex from "./dashboard/transactions/index";
+import TransactionsEdit from "./dashboard/transactions/edit";
+import TransactionsNew from "./dashboard/transactions/new";
+
 const routeConfig = [
   { path: "/", element: <Login /> },
   { path: "/register", element: <Register /> },
@@ -29,6 +33,9 @@ const routeConfig = [
   { path: "/inventory", element: <InventoryIndex /> },
   { path: "/inventory/:id", element: <InventoryEdit /> },
   { path: "/inventory/new", element: <InventoryNew /> },
+  { path: "/transactions", element: <TransactionsIndex /> },
+  { path: "/transactions/:id", element: <TransactionsEdit /> },
+  { path: "/transactions/new", element: <TransactionsNew /> },
 ];
 
 const AppRoutes = () => {
