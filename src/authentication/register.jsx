@@ -70,7 +70,7 @@ export default function Register() {
                   .includes(input.toLowerCase())
               }
               options={[
-                { value: "Admin", label: "Admin" },
+                { value: "Manager", label: "Manager" },
                 { value: "Staff", label: "Staff" },
               ]}
             />
