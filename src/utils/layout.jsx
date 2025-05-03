@@ -65,6 +65,27 @@ export default function LayoutComponent({ children }) {
       navigate(keyToPath[key]);
     }
   };
+
+  const logoutHandler = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api-warehouse/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
+      navigate("/");
+      setSelectedKey("2");
+      localStorage.setItem("selectedKey", "2");
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+      navigate("/");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -105,16 +126,24 @@ export default function LayoutComponent({ children }) {
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
+          <div className="flex justify-between">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+            <Button
+              className="bg-red-500 text-white my-5 mr-5"
+              onClick={logoutHandler}
+            >
+              Logout
+            </Button>
+          </div>
         </Header>
         <Content
           style={{
